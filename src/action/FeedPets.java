@@ -16,8 +16,10 @@ public class FeedPets {
 
     public void start(){
         Point actualMousePosition = (Point)mouseStartPosition.clone();
+        //Skip the first pets cause we already feed him
+        ACTION.moveMouseToNextPets(actualMousePosition);
 
-        for (int i = 0; i < nbPets; i++) {
+        for (int i = 1; i < nbPets; i++) {
             if (i != 0 && i % 5 == 0) {
                 ACTION.moveMouseNewLine(mouseStartPosition, actualMousePosition);
             }
