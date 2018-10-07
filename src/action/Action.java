@@ -3,6 +3,7 @@ package action;
 import constant.Interval;
 
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
 public class Action {
@@ -34,6 +35,14 @@ public class Action {
         this.robot.mousePress(MouseEvent.BUTTON3_MASK);
         this.robot.mouseRelease(MouseEvent.BUTTON3_MASK);
         this.robot.delay(Interval.SPEED);
+    }
+
+    public void alt_tab() {
+        robot.delay(200);
+        robot.keyPress(KeyEvent.VK_ALT);
+        robot.keyPress(KeyEvent.VK_TAB);
+        robot.keyRelease(KeyEvent.VK_TAB);
+        robot.keyRelease(KeyEvent.VK_ALT);
     }
 
     public void feedPets() {
