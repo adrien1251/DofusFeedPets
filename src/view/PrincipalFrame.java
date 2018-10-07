@@ -7,11 +7,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PincipalFrame extends JFrame {
+public class PrincipalFrame extends JFrame {
     private final NumberPetsPanel numberPetsPanel = new NumberPetsPanel();
     private final FindStartPosition findStartPosition = new FindStartPosition();
 
-    public PincipalFrame() {
+    public PrincipalFrame() {
         this.setLayout(new FlowLayout());
 
         JButton startBtn = new JButton("Start");
@@ -34,11 +34,13 @@ public class PincipalFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
+        this.setAlwaysOnTop(true);
     }
 
     public static void main(String... args) {
         Toolkit.getDefaultToolkit().addAWTEventListener(
                 new FindStartPosition.Listener(), AWTEvent.MOUSE_EVENT_MASK | AWTEvent.FOCUS_EVENT_MASK);
-        new PincipalFrame();
+
+        new PrincipalFrame();
     }
 }
