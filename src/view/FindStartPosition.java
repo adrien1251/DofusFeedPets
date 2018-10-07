@@ -50,10 +50,16 @@ public class FindStartPosition extends JPanel {
                             case 4:
                                 btnFindPosition.setText("Find start position (Valider)");
                                 break;
+                            case 5:
+                                btnFindPosition.setText("Find start position (OK)");
+                                break;
+                            case 6:
+                                btnFindPosition.setText("Find start position (CLOSE FEED WINDOWS)");
+                                break;
                         }
                     }
 
-                    if (nbClick == 5) {
+                    if (nbClick == 7) {
                         find = false;
                         nbClick = 0;
                         btnFindPosition.setText("Find start position");
