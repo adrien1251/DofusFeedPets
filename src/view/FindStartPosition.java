@@ -1,5 +1,6 @@
 package view;
 
+import action.Action;
 import constant.Interval;
 
 import javax.swing.*;
@@ -10,6 +11,7 @@ public class FindStartPosition extends JPanel {
     private static Point startPosition = new Point(664, 280);
     private static int nbClick = 0;
     private static JButton btnFindPosition = new JButton("Find start position");
+
     public static boolean find = false;
 
     public FindStartPosition() {
@@ -64,6 +66,8 @@ public class FindStartPosition extends JPanel {
                         nbClick = 0;
                         btnFindPosition.setText("Find start position");
                     }
+
+                    Action.getInstance().alt_tab();
                 }
             }
         }
