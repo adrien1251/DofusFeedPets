@@ -1,7 +1,5 @@
 package action;
 
-import action.Action;
-
 import java.awt.*;
 
 public class FeedPets {
@@ -20,7 +18,7 @@ public class FeedPets {
         ACTION.moveMouseToNextPets(actualMousePosition);
 
         for (int i = 1; i < nbPets; i++) {
-            if (i != 0 && i % 5 == 0) {
+            if (i % 5 == 0) {
                 ACTION.moveMouseNewLine(mouseStartPosition, actualMousePosition);
             }
             ACTION.pressedAndReleased(actualMousePosition);
