@@ -50,4 +50,8 @@ public class Action {
             pressedAndReleased(point);
         }
     }
+
+    public void logIn(){
+
+    }
 }
