@@ -1,6 +1,7 @@
 package action;
 
 import constant.Interval;
+import constant.Log;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -30,11 +31,11 @@ public class Action {
         actualMousePosition.setLocation(mouseStartPosition.getX(), actualMousePosition.getY() + Interval.Y_INTERVAL);
     }
 
-    public void pressedAndReleased(Point point) {
+    public void pressedAndReleased(Point point, int speed) {
         this.robot.mouseMove((int) point.getX(), (int) point.getY());
         this.robot.mousePress(MouseEvent.BUTTON3_MASK);
         this.robot.mouseRelease(MouseEvent.BUTTON3_MASK);
-        this.robot.delay(Interval.SPEED);
+        this.robot.delay(speed);
     }
 
     public void alt_tab() {
@@ -47,11 +48,23 @@ public class Action {
 
     public void feedPets() {
         for (Point point : Interval.FEED_PETS_POINTS) {
-            pressedAndReleased(point);
+            pressedAndReleased(point, Interval.SPEED);
         }
     }
 
-    public void logIn(){
-
+    public void typeText(Point point, char[] text){
+        pressedAndReleased(point, 100);
+        for(char lettre: text){
+            if (lettre == '3') {
+                robot.keyPress(KeyEvent.VK_SHIFT);
+                robot.keyPress(KeyEvent.VK_3);
+                robot.keyRelease(KeyEvent.VK_3);
+                robot.keyRelease(KeyEvent.VK_SHIFT);
+            } else {
+                robot.keyPress(KeyEvent.getExtendedKeyCodeForChar(lettre));
+                robot.keyRelease(KeyEvent.getExtendedKeyCodeForChar(lettre));
+            }
+        }
+        robot.delay(500);
     }
 }

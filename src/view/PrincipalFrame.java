@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Timer;
 
 public class PrincipalFrame extends JFrame {
     private final NumberPetsPanel numberPetsPanel = new NumberPetsPanel();
@@ -18,9 +19,19 @@ public class PrincipalFrame extends JFrame {
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!FindStartPosition.find) {
-                    new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()).start();
+                if (!FindStartPosition.find && !FindStartPosition.findLogInput) {
+                    new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()).start(false);
                     JOptionPane.showMessageDialog(null, "Your pets was feed with succees ! =D");
+                }
+            }
+        });
+        JButton start3HoursBtn = new JButton("Start 3 hours");
+        start3HoursBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (!FindStartPosition.find && !FindStartPosition.findLogInput) {
+                    Timer timer = new Timer();
+                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), 0, 1000 * 60);
                 }
             }
         });
@@ -28,9 +39,10 @@ public class PrincipalFrame extends JFrame {
         this.add(numberPetsPanel);
         this.add(findStartPosition);
         this.add(startBtn);
+        this.add(start3HoursBtn);
         this.setTitle("Dofus FeedPets");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setSize(300, 130);
+        this.setSize(400, 180);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);

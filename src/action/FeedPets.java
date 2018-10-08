@@ -1,8 +1,12 @@
 package action;
 
-import java.awt.*;
+import constant.Interval;
+import constant.Log;
 
-public class FeedPets {
+import java.awt.*;
+import java.util.TimerTask;
+
+public class FeedPets extends TimerTask {
     private final Action ACTION = Action.getInstance();
     private Point mouseStartPosition;
     private int nbPets;
@@ -12,19 +16,40 @@ public class FeedPets {
         this.nbPets = nbPets;
     }
 
-    public void start(){
+    public void start(boolean feedFirst){
         Point actualMousePosition = (Point)mouseStartPosition.clone();
         //Skip the first pets cause we already feed him
-        ACTION.moveMouseToNextPets(actualMousePosition);
+        int startIndex=0;
+        if(!feedFirst) {
+            startIndex = 1;
+            ACTION.moveMouseToNextPets(actualMousePosition);
+        }
 
-        for (int i = 1; i < nbPets; i++) {
-            if (i % 5 == 0) {
+        for (int i=startIndex; i < nbPets; i++) {
+            if (i != 0 && i % 5 == 0) {
                 ACTION.moveMouseNewLine(mouseStartPosition, actualMousePosition);
             }
-            ACTION.pressedAndReleased(actualMousePosition);
+            ACTION.pressedAndReleased(actualMousePosition, Interval.SPEED);
             ACTION.feedPets();
 
             ACTION.moveMouseToNextPets(actualMousePosition);
         }
+    }
+
+    public void start3Hours(){
+        ACTION.pressedAndReleased(Interval.MIDDLE_FRAME_POINT[0], 100);
+        ACTION.typeText(Interval.LOG_POINTS[0], Log.LOGIN.toCharArray());
+        ACTION.typeText(Interval.LOG_POINTS[1], Log.PASSWORD.toCharArray());
+        ACTION.pressedAndReleased(Interval.LOG_POINTS[2], 10000);
+        ACTION.pressedAndReleased(Interval.BASKET_POINT[0], 500);
+        ACTION.pressedAndReleased(Interval.BASKET_POINT[1], 500);
+        ACTION.typeText(Interval.BASKET_POINT[2], "peki".toCharArray());
+
+        start(true);
+    }
+
+    public void run(){
+        System.out.println("On commence");
+        start3Hours();
     }
 }
