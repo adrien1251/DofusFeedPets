@@ -19,7 +19,7 @@ public class PrincipalFrame extends JFrame {
         startBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!FindStartPosition.find && !FindStartPosition.findLogInput) {
+                if (!FindStartPosition.find) {
                     new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()).start(false);
                 }
             }
@@ -28,9 +28,9 @@ public class PrincipalFrame extends JFrame {
         start3HoursBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!FindStartPosition.find && !FindStartPosition.findLogInput) {
+                if (!FindStartPosition.find && !FindStartPosition.findLogInput && !FindStartPosition.findBasketInput && !FindStartPosition.findDisconnectInput ) {
                     Timer timer = new Timer();
-                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), (1000*60*60*3), (1000*60*60*3)+(1000*60*5));
+                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), 0, (1000*60*60*3)+(1000*60*5));
                 }
             }
         });
