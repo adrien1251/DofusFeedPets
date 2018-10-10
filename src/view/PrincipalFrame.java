@@ -30,7 +30,7 @@ public class PrincipalFrame extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 if (!FindStartPosition.find && !FindStartPosition.findLogInput) {
                     Timer timer = new Timer();
-                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), (1000*60*60), (1000*60*60*3)+(1000*60*5));
+                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), (1000*60*60*3), (1000*60*60*3)+(1000*60*5));
                 }
             }
         });
