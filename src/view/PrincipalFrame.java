@@ -46,7 +46,6 @@ public class PrincipalFrame extends JFrame {
         this.setLocationRelativeTo(null);
         this.setVisible(true);
         this.setResizable(false);
-        this.setAlwaysOnTop(true);
     }
 
     public static void main(String... args) {

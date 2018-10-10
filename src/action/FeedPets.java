@@ -37,7 +37,6 @@ public class FeedPets extends TimerTask {
     }
 
     public void start3Hours(){
-        ACTION.pressedAndReleased(Interval.MIDDLE_FRAME_POINT[0], 100);
         ACTION.typeText(Interval.LOG_POINTS[0], Log.LOGIN.toCharArray());
         ACTION.typeText(Interval.LOG_POINTS[1], Log.PASSWORD.toCharArray());
         ACTION.pressedAndReleased(Interval.LOG_POINTS[2], 10000);
@@ -46,6 +45,8 @@ public class FeedPets extends TimerTask {
         ACTION.typeText(Interval.BASKET_POINT[2], "peki".toCharArray());
 
         start(true);
+
+        ACTION.disconnectAccount(Interval.DISCONNECT_POINT);
     }
 
     public void run(){

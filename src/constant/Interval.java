@@ -10,7 +10,7 @@ public class Interval {
     public static Point[] FEED_PETS_POINTS = new Point[6];
     public static Point[] LOG_POINTS = new Point[3];
     public static Point[] BASKET_POINT = new Point[3];
-    public static Point[] MIDDLE_FRAME_POINT = new Point[1];
+    public static Point[] DISCONNECT_POINT = new Point[5];
 
     public static void setFeedPetsPoints(int i, Point point){
         FEED_PETS_POINTS[i] = point;
@@ -21,7 +21,7 @@ public class Interval {
     public static void setBasketPoint(int i, Point point){
         BASKET_POINT[i] = point;
     }
-    public static void setMiddleFramePoint(int i, Point point){
-        MIDDLE_FRAME_POINT[i] = point;
+    public static void setDisconnectPoint(int i, Point point){
+        DISCONNECT_POINT[i] = point;
     }
 }

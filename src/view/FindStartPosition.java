@@ -12,16 +12,17 @@ public class FindStartPosition extends JPanel {
     private static int nbClick = 0;
     private static int nbClickLog = 0;
     private static int nbClickBasket = 0;
+    private static int nbDisconnect= 0;
 
     private static JButton btnFindPosition = new JButton("Find start position");
     private static JButton showLogInput = new JButton("Show log input");
     private static JButton showBasketInput = new JButton("Show Basket");
-    private static JButton showMiddleFrameInput = new JButton("Show exit middle frame");
+    private static JButton showDisconnectInput = new JButton("Show disconnect");
 
     public static boolean find = false;
     public static boolean findLogInput = false;
     public static boolean findBasketInput = false;
-    public static boolean findMiddleFrameInput = false;
+    public static boolean findDisconnectInput = false;
 
     public FindStartPosition() {
         btnFindPosition.addActionListener(new ActionListener() {
@@ -58,16 +59,16 @@ public class FindStartPosition extends JPanel {
 
         add(showBasketInput);
 
-        showMiddleFrameInput.addActionListener(new ActionListener() {
+        showDisconnectInput.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!findMiddleFrameInput) {
-                    findMiddleFrameInput = true;
+                if (!findDisconnectInput) {
+                    findDisconnectInput = true;
                 }
             }
         });
 
-        add(showMiddleFrameInput);
+        add(showDisconnectInput);
     }
 
     public Point getStartPosition() {
@@ -133,10 +134,15 @@ public class FindStartPosition extends JPanel {
                     }
                     Action.getInstance().alt_tab();
                 }
-            } else if (findMiddleFrameInput) {
+            } else if (findDisconnectInput) {
                 if (FocusEvent.FOCUS_LOST == event.getID()) {
-                    Interval.setMiddleFramePoint(0, MouseInfo.getPointerInfo().getLocation());
-                    findMiddleFrameInput = false;
+                    nbDisconnect++;
+                    Interval.setDisconnectPoint(nbDisconnect - 1, MouseInfo.getPointerInfo().getLocation());
+
+                    if (nbDisconnect == 5) {
+                        nbDisconnect = 0;
+                        findDisconnectInput = false;
+                    }
                     Action.getInstance().alt_tab();
                 }
             }
