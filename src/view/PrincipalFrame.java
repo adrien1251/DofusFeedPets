@@ -12,6 +12,8 @@ public class PrincipalFrame extends JFrame {
     private final NumberPetsPanel numberPetsPanel = new NumberPetsPanel();
     private final FindStartPosition findStartPosition = new FindStartPosition();
 
+    private Timer timerToSchedule;
+
     public PrincipalFrame() {
         this.setLayout(new FlowLayout());
 
@@ -29,9 +31,18 @@ public class PrincipalFrame extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (!FindStartPosition.find && !FindStartPosition.findLogInput && !FindStartPosition.findBasketInput && !FindStartPosition.findDisconnectInput ) {
-                    Timer timer = new Timer();
-                    timer.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), 0, (1000*60*60*3)+(1000*60*5));
+                    timerToSchedule = new Timer();
+                    timerToSchedule.schedule(new FeedPets(findStartPosition.getStartPosition(), numberPetsPanel.getNumberPets()), 1000 * 60 * numberPetsPanel.getDelaisLancement(), 1000 * 60 * numberPetsPanel.getHowManyTime());
                 }
+            }
+        });
+
+        JButton annulerBtn = new JButton("Stop 3H");
+        annulerBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(timerToSchedule != null) timerToSchedule.cancel();
+                timerToSchedule = null;
             }
         });
 
@@ -39,6 +50,7 @@ public class PrincipalFrame extends JFrame {
         this.add(findStartPosition);
         this.add(startBtn);
         this.add(start3HoursBtn);
+        this.add(annulerBtn);
         this.setTitle("Dofus FeedPets");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setSize(400, 180);
